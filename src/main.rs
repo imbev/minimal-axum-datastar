@@ -8,10 +8,14 @@ use axum::{
 };
 use datastar::patch_elements::PatchElements;
 use tokio::time::sleep;
+use tower_http::compression::CompressionLayer;
 
 #[tokio::main]
 async fn main() {
-    let app = Router::new().route("/", get(root)).route("/sse", get(sse));
+    let app = Router::new()
+        .route("/", get(root))
+        .route("/sse", get(sse))
+        .layer(CompressionLayer::new().zstd(true));
 
     let listener = tokio::net::TcpListener::bind("0.0.0.0:3000").await.unwrap();
     axum::serve(listener, app).await.unwrap();
