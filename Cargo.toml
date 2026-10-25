@@ -1,0 +1,10 @@
+[package]
+name = "minimal-axum-datastar"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+asynk-strim = "0.1.5"
+axum = "0.8.9"
+datastar = { version = "0.4.1", features = ["axum"] }
+tokio = { version = "1.54.1", features = ["macros", "rt-multi-thread"] }
