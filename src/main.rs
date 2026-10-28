@@ -19,7 +19,7 @@ async fn main() {
         .route("/", get(root))
         .route("/sse", get(sse))
         .layer(
-            CompressionLayer::new().zstd(true).compress_when(
+            CompressionLayer::new().br(true).compress_when(
                 SizeAbove::default()
                     .and(NotForContentType::GRPC)
                     .and(NotForContentType::IMAGES),
